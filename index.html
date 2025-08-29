@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to top, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+        }
+        .card h1 {
+            color: #e65252;
+            font-size: 2.5em;
+            margin-top: 0;
+            animation: bounceIn 1s ease-out;
+        }
+        .card p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .card .signature {
+            font-style: italic;
+            margin-top: 20px;
+            font-size: 1em;
+            color: #666;
+        }
+        #countdown {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ff5e62;
+            margin-top: 20px;
+        }
+        .gif {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.1); opacity: 0; }
+            60% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXhkcmJ2dDVvcTlwN3M4emM2dGllOThsOWF1ZWkwMW10eHByYWY3YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/feio2yIUMtdqWjRiaF/giphy.gif" alt="GIF de Feliz Cumpleaños" class="gif">
+        <h1 id="greeting">¡Feliz Cumpleaños!</h1>
+        <p id="message"></p>
+        <p class="signature" id="signature"></p>
+        <div id="countdown"></div>
+    </div>
+
+    <script>
+        // Personaliza estos valores
+        const birthdayPerson = "Diana Elizabeth"; 
+        const senderName = "Ricardo";
+
+        // Establece la fecha del cumpleaños
+        const birthdayDate = new Date('August 29, 2025 00:00:00'); // ¡Cambia a la fecha correcta!
+
+        // Actualiza el contenido con JavaScript
+        document.getElementById('greeting').textContent = `¡Feliz Cumpleaños Diana Elizabeth, ${birthdayPerson}! 🎉`;
+        document.getElementById('message').textContent = `Espero que tu día esté lleno de alegría, amor y muchísimas sorpresas. Que todos tus deseos se hagan realidad. ¡Te deseo lo mejor hoy y siempre!`;
+        document.getElementById('signature').textContent = `Con mucho cariño, ${senderName}`;
+
+        // Función para la cuenta regresiva
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').textContent = "¡Es tu día!";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent = `Faltan: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        };
+
+        // Actualiza la cuenta regresiva cada segundo
+        setInterval(updateCountdown, 1000);
+
+        // Llamar a la función una vez para evitar el parpadeo inicial
+        updateCountdown();
+    </script>
+</body>
+</html>
